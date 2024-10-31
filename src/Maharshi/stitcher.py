@@ -23,6 +23,6 @@ class PanaromaStitcher():
         return stitched_image, homography_matrix_list
 
     def say_hi(self):
-        print('Hi From satvik')
+        print('Hi From Maharshi')
     
     
