@@ -6,17 +6,15 @@ class PanaromaStitcher():
         pass
 
     def make_panaroma_for_images_in(self,path):
-        imf = path
-
         ####  Your Implementation here
         #### you can use functions, class_methods, whatever!! Examples are illustrated below. Remove them and implement yours.
         #### Just make sure to return final stitched image and all Homography matrices from here
         
-        pimages , centerIdx = initializer(path)
+        cylinderical_images , centerIdx = initializer(path)
         self.say_hi()
         
         # Return Final panaroma
-        stitched_image, H_matrices = funcs.pan_creator(pimages,centerIdx)
+        stitched_image, H_matrices = funcs.Image_stitcher(cylinderical_images,centerIdx)
         #####
         homography_matrix_list =H_matrices
         

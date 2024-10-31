@@ -3,22 +3,24 @@ import cv2
 import random
 import math
 
-def pan_creator(pimages,centerIdx):
-    a = pimages[centerIdx]
+def Image_stitcher(cylinderical_images,centerIdx):
+    a = cylinderical_images[centerIdx]
     hom = []
-    for b in pimages[centerIdx+1:]:
+    for b in cylinderical_images[centerIdx+1:]:
         a , homo = wrap(a,b)
-        if homo is not None:
-            hom = np.append(hom,homo)
-    group1 = a
-    a = pimages[centerIdx]
-    for b in pimages[0:centerIdx][::-1]:
+        if homo is None:
+            break
+        hom = np.append(hom,homo)
+    right_group = a
+    a = cylinderical_images[centerIdx]
+    for b in cylinderical_images[0:centerIdx][::-1]:
         a, homo= wrap(a,b)
-        if homo is not None:
-            hom = np.append(hom,homo)
-    group2 = a
-    a = group1
-    b = group2
+        if homo is None:
+            break
+        hom = np.append(hom,homo)
+    left_group = a
+    a = right_group
+    b = left_group
     result,homo = wrap(a,b)
     if homo is not None:
         hom = np.append(hom,homo)
@@ -70,14 +72,8 @@ def hom_calc(current,previous):
         a_vals.append(a2)
 
     matrixA = np.matrix(a_vals)
-
-    #svd composition
     u, s, v = np.linalg.svd(matrixA)
-
-    #reshape the min singular value into a 3 by 3 matrix
     H = np.reshape(v[8], (3, 3))
-
-    #normalize and now we have h
     H = (1/H.item(8)) * H
     return H
 
