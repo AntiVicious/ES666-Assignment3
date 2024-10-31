@@ -43,7 +43,7 @@ def match(i1,i2,direction = None):
     for i,(m,n) in enumerate(matches):
         if(m.distance) < (0.5*n.distance):
             matched_features.append((m.trainIdx,m.queryIdx))
-    if len(matched_features) >=10:
+    if len(matched_features) >=25:
         pointsCurrent = imageSet2['kp']
         pointsPrevious = imageSet1['kp']
 
