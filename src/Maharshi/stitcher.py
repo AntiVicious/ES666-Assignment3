@@ -1,11 +1,5 @@
-
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-import random
-import math
 from src.Maharshi.func_folder.initializer import initializer
-
+from src.Maharshi.func_folder import funcs
 
 class PanaromaStitcher():
     def __init__(self):
@@ -18,11 +12,11 @@ class PanaromaStitcher():
         #### you can use functions, class_methods, whatever!! Examples are illustrated below. Remove them and implement yours.
         #### Just make sure to return final stitched image and all Homography matrices from here
         
-        pimages , centerIdx = initializer(self,path)
+        pimages , centerIdx = initializer(path)
         self.say_hi()
         
         # Return Final panaroma
-        stitched_image, H_matrices = self.pan_creator(pimages,centerIdx)
+        stitched_image, H_matrices = funcs.pan_creator(pimages,centerIdx)
         #####
         homography_matrix_list =H_matrices
         
